@@ -1,0 +1,55 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><script>
+function moveButton() {
+    const btn = document.getElementById('noBtn');
+    const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+    btn.style.left = x + 'px';
+    btn.style.top = y + 'px';
+}
+
+function celebrate() {
+    document.getElementById('mainCard').style.display = 'none';
+    document.getElementById('celebration').style.display = 'block';
+    startFireworks();
+}
+
+// Floating hearts
+setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 400);
+
+// 🎆 Fireworks
+function startFireworks() {
+    setInterval(() => {
+        for (let i = 0; i < 30; i++) {
+            const spark = document.createElement('div');
+            spark.style.position = 'fixed';
+            spark.style.width = '6px';
+            spark.style.height = '6px';
+            spark.style.borderRadius = '50%';
+            spark.style.background = `hsl(${Math.random()*360},100%,60%)`;
+            spark.style.left = Math.random() * window.innerWidth + 'px';
+            spark.style.top = Math.random() * window.innerHeight + 'px';
+            spark.style.zIndex = '999';
+
+            document.body.appendChild(spark);
+
+            spark.animate([
+                { transform: 'scale(1)', opacity: 1 },
+                { transform: 'scale(4)', opacity: 0 }
+            ], {
+                duration: 1000,
+                easing: 'ease-out'
+            });
+
+            setTimeout(() => spark.remove(), 1000);
+        }
+    }, 800);
+}
+</script>
